@@ -1,9 +1,27 @@
 [build]
   base = "public"
   publish = "public"
-  command = "npm run build"
+  command = "npm install && npm run build"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=3600"
+    X-Frame-Options = "DENY"
+    Content-Security-Policy = "default-src 'self'"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  force = true
+
+[dev]
+  framework = "#static"
+  targetPort = 8000
+  autoLaunch = false
+
+[context.production.environment]
+  SOCKET_URL = "https://your-railway-app.up.railway.app"
+  NODE_ENV = "production"
