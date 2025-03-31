@@ -1,22 +1,22 @@
 {
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@railway/node"
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "nixpacks",
+    "buildCommand": "npm install",
+    "startCommand": "node server.js"
+  },
+  "deploy": {
+    "restartPolicy": {
+      "maxRetries": 5,
+      "delaySeconds": 10
     }
-  ],
-  "routes": [
-    {
-      "src": "/",
-      "dest": "/public/index.html"
+  },
+  "variables": {
+    "PORT": {
+      "value": "8000"
     },
-    {
-      "src": "/chat",
-      "dest": "/public/chat.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/public/$1"
+    "NODE_ENV": {
+      "value": "production"
     }
-  ]
+  }
 }
